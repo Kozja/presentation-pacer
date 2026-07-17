@@ -19,13 +19,8 @@ The clock **resets automatically** whenever you move into a new slide range, and
 
 - `PrezentacjaZegar.bas`: main VBA module (`ModZegar`) with the clock logic and segment definitions
 - `ClsPresEvents.cls`: class module (`KlasaZdarzen`) that wires up slide show events
-- `INSTRUKCJA_zegar_prezentacji.md`: installation instructions (Polish)
 
 ## Setup
-
-See [`INSTRUKCJA_zegar_prezentacji.md`](INSTRUKCJA_zegar_prezentacji.md) for step-by-step installation instructions.
-
-Quick summary:
 
 1. Enable the Developer tab (File → Options → Customize Ribbon → check "Developer")
 2. Open the VBA editor (Developer → Visual Basic, or Alt+F11)
@@ -53,7 +48,7 @@ Quick summary:
 
 ## Platform notes
 
-`PrezentacjaZegar.bas` is written for **macOS** PowerPoint, where `Application.OnTime` is not available, so the clock updates on every slide change rather than every second.
+`PrezentacjaZegar.bas` is written for **macOS** PowerPoint, where `Application.OnTime` is not available. Instead, `StartClock` runs a polling loop (`Timer` + `DoEvents`) that calls `UpdateClock` roughly once per second, so the clock still ticks every second even without `Application.OnTime`. It also refreshes immediately on slide change via `App_SlideShowNextSlide`.
 
 ## License
 

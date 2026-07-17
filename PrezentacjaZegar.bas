@@ -2,8 +2,10 @@ Option Explicit
 
 ' ============================================================
 '  ZEGAR CZASU PREZENTACJI - wersja MAC (bez Application.OnTime)
-'  Application.OnTime NIE istnieje w VBA na macOS, wiec zegar
-'  aktualizuje sie przy KAZDEJ ZMIANIE SLAJDU (nie co sekunde).
+'  Application.OnTime NIE istnieje w VBA na macOS, wiec StartClock
+'  odpytuje reczne w petli (Timer + DoEvents) i wywoluje UpdateClock
+'  co ok. 1 sekunde. Dodatkowo odswieza sie natychmiast przy kazdej
+'  zmianie slajdu (App_SlideShowNextSlide).
 '  Resetuje sie przy wejsciu w nowy segment slajdow.
 ' ============================================================
 
